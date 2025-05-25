@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { useLoading } from "chz_utils"
-import { reactive, ref } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import State from '@/components/State.vue';
 import { makeToast } from '@/common/snackbar';
@@ -36,7 +36,6 @@ import logger from "@/common/logger";
 import storage from "@/common/storage";
 
 const router = useRouter()
-
 
 const inputData = reactive({
     username: '',
@@ -54,6 +53,19 @@ const [doLogin, loginBtnState] = useLoading(async () => {
 
         windowPage.value = 2
         makeToast(`登录成功`, "success")
+
+        // 如果还有 signSessionID, 那么就跳转到 oauth
+        let signSessionID = router.currentRoute.value.query.signSessionID
+        if (signSessionID) {
+            logger.info("有 SignSessionID, 跳转到 OAuth")
+
+            router.push({
+                path: "/oauth",
+                query: {
+                    signSessionID: signSessionID
+                }
+            })
+        }
     } catch (error) {
         // 清空
         inputData.password = ''
@@ -61,6 +73,4 @@ const [doLogin, loginBtnState] = useLoading(async () => {
         makeToast(`登录失败: ${error}`, "error")
     }
 })
-
-
 </script>

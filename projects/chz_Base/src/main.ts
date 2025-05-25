@@ -15,14 +15,25 @@ const app = createApp(App)
 registerPlugins(app)
 
 router.beforeEach((to) => {
-    if (to.fullPath == '/debug' || to.fullPath == '/') {
+    if (to.path == '/debug' || to.path == '/') {
         return
     }
 
     let authToken = storage.value.AuthToken
-    let isToLoginOrRegister = to.fullPath == '/login' || to.fullPath == '/register'
+    let isToLoginOrRegister = to.path == '/login' || to.path == '/register'
+    let isToOauth = to.path == '/oauth'
 
-    if (!isToLoginOrRegister && !authToken && !to.meta.notNeedLogin) {
+    if (isToOauth && !authToken && to.query.signSessionID) {
+        // 如果是去 Oauth 并且没有登录, 那么带上 Sign Session ID 传递给 Login
+        makeToast("在去 Oauth 之前, 请先登录", "warning")
+        return {
+            path: '/login',
+            query: {
+                signSessionID: to.query.signSessionID
+            }
+        }
+    }
+    else if (!isToLoginOrRegister && !authToken && !to.meta.notNeedLogin) {
         makeToast("请先登录", "warning")
         return '/login'
     } else if (isToLoginOrRegister && authToken) {
