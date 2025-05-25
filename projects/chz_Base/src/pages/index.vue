@@ -25,18 +25,20 @@
               <!-- 解释 -->
               <Transition name="fade">
                 <v-row v-show="showOtherElementFirst" justify="center" align="center" class="mb-4">
-                  <span class=" text-h4" style="font-family: 'Maler';">A boy who codes.</span>
+                  <span class="text-h3" style="font-family: 'Maler';">A boy who codes.</span>
                 </v-row>
               </Transition>
             </v-col>
 
             <!-- 往下 -->
             <v-col cols="12">
+              <!-- 项目列表 -->
               <Transition name="fade" class="mb-4">
                 <v-row v-show="showOtherElementSecond" justify="center" align="center">
                   <v-btn variant="outlined" text="Chz Chat" @click="goToProject('https://chat.chhongzh.xyz:5777')" />
                 </v-row>
               </Transition>
+
               <Transition name="fade">
                 <v-row v-show="showOtherElementSecond" justify="center" align="center">
                   <v-btn variant="tonal" icon="mdi-chevron-down" @click="viewIntroduce" />
@@ -56,7 +58,7 @@
             <VCodeBlock :code="chhongzhCode" highlightjs style="font-size: 1.5rem;" lang="golang" :copyTab="false"
               :copyButton="false" :copyIcons="false" tabs @run="console.log('123')">
               <template #label>
-                <p ref="introduceTitleRef" class="text-h4">我的自我介绍</p>
+                <p ref="introduceTitleRef" class="text-h4">简介</p>
               </template>
             </VCodeBlock>
           </v-card-text>
