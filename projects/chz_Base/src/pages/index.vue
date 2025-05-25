@@ -34,7 +34,7 @@
             <v-col cols="12">
               <Transition name="fade" class="mb-4">
                 <v-row v-show="showOtherElementSecond" justify="center" align="center">
-                  <v-btn variant="outlined" text="Chz Chat" @click="viewIntroduce" />
+                  <v-btn variant="outlined" text="Chz Chat" @click="goToProject('https://chat.chhongzh.xyz:5777')" />
                 </v-row>
               </Transition>
               <Transition name="fade">
@@ -131,6 +131,10 @@ const initBackgroundText = () => {
     backgroundTexts.value[i] = getRandomElements(getRandomElements(backgroundText, 15).concat('CHZ!').concat('WMZ!'), 17)
     console.log(backgroundTexts.value[i])
   }
+}
+
+const goToProject = (url: string) => {
+  window.open(url, '_blank')
 }
 
 
