@@ -68,6 +68,8 @@
         <v-card-text>
           <span class="text-h5">由 chhongzh 设计并开发.</span>
           <Text>
+            Commit: <v-code>{{ abbreviatedSha }}</v-code><br />
+            Message: <v-code>{{ commitMessage }}</v-code>
           </Text>
         </v-card-text>
       </v-card>
@@ -83,6 +85,12 @@ import chhongzhCode from '@/assets/chhongzh.go?raw'
 import { Vue3Marquee } from 'vue3-marquee';
 import backgroundText from '@/assets/Background Text'
 import { getRandomElements } from '@/common/utils';
+import {
+  abbreviatedSha,
+  commitMessage
+}
+  // @ts-ignore
+  from '~build/info'
 
 definePage({
   meta: {
