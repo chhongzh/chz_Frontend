@@ -1,0 +1,13 @@
+{
+    "name": "chz_network",
+    "version": "1.0.0",
+    "main": "main.ts",
+    "dependencies": {
+        "@types/axios": "^0.14.4",
+        "axios": "^1.9.0",
+        "tslog": "^4.9.3",
+        "vue": "^3.5.13"
+    },
+    "type": "module",
+    "license": "UNLICENSED"
+}

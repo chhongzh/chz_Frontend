@@ -1,0 +1,9 @@
+{
+  "name": "chz_utils",
+  "version": "1.0.0",
+  "main": "main.ts",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "js-cookie": "^3.0.5"
+  }
+}

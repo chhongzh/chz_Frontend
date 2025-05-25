@@ -1,0 +1,7 @@
+@font-face {
+    font-family: "Maler";
+    /* src: url("@/assets/fonts/Maler.ttf"); */
+    /* 优化过后的 Maler 字体,  */
+    /* 只包含 A boy who codes. */
+    src: url("@/assets/fonts/optimized.ttf");
+}
