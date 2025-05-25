@@ -19,6 +19,6 @@ export class UserService {
     public async login(username: string, password: string) {
         let result = await this.nw.post("/user/login", { username, password }) as any
 
-        return result
+        return result.AuthToken
     }
 }
