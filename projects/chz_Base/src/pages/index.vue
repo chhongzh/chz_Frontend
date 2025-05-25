@@ -131,7 +131,6 @@ const initBackgroundText = () => {
   for (let i = 0; i < backgroundTextLineCount; i++) {
     // 随机取出一些字符
     backgroundTexts.value[i] = getRandomElements(getRandomElements(backgroundText, 15).concat('CHZ!').concat('WMZ!'), 17)
-    console.log(backgroundTexts.value[i])
   }
 }
 
