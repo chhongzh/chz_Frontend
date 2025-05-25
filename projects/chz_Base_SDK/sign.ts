@@ -1,6 +1,7 @@
 import Network from "chz_network";
 import { ILogObj, Logger } from "tslog";
 import { Ref } from "vue"
+import { useStorage } from "@vueuse/core"
 
 export class SignService {
     private nw: Network
@@ -14,6 +15,7 @@ export class SignService {
         this.nw = nw
         this.applicationID = applicationID
         this.frontendBaseURL = frontendBaseURL
+        this.accessToken = useStorage('chz_Base_Sdk AccessToken', '')
     }
 
     // 打开 Login, 并将会存储 AccessToken.
