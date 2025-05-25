@@ -71,7 +71,8 @@
           <span class="text-h5">由 chhongzh 设计并开发.</span>
           <Text>
             Commit: <v-code>{{ abbreviatedSha }}</v-code><br />
-            Message: <v-code>{{ commitMessage }}</v-code>
+            Message: <v-code>{{ commitMessage }}</v-code><br />
+            Date: <v-code>{{ committerDate }}</v-code>
           </Text>
         </v-card-text>
       </v-card>
@@ -89,7 +90,8 @@ import backgroundText from '@/assets/Background Text'
 import { getRandomElements } from '@/common/utils';
 import {
   abbreviatedSha,
-  commitMessage
+  commitMessage,
+  committerDate
 }
   // @ts-ignore
   from '~build/info'
