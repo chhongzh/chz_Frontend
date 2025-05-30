@@ -14,28 +14,19 @@
       <v-card style="height: 100%; " class="transparent" :elevation="12">
         <v-card-text style="height: 100%;">
           <!-- 头像优先 -->
-          <v-row justify="center" align="center" style="height: 70%;" class="transparent">
+          <v-row justify="center" align="center" style="height: 90%;" class="transparent">
             <v-sheet class="avatar mb-6 transparent" @animationend="startShowOthers">
               <v-img ondragstart="return false" rounded="circle" src="@/assets/Avatar Dark but Vuetify.jpg"></v-img>
             </v-sheet>
           </v-row>
 
 
-          <v-row justify="center" style="height: 30%;">
-            <v-col cols="12">
-              <!-- 解释 -->
-              <Transition name="fade">
-                <v-row v-show="showOthersElement[0]" justify="center" align="center" class="mb-4">
-                  <span class="text-h3" style="font-family: 'Maler';">A boy who codes.</span>
-                </v-row>
-              </Transition>
-            </v-col>
-
+          <v-row justify="center" style="height: 10%;">
             <!-- 往下 -->
             <v-col cols="12">
               <!-- 项目列表 -->
               <Transition name="fade" class="mb-4">
-                <v-row v-show="showOthersElement[1]" justify="center" align="center">
+                <v-row v-show="showOthersElement[0]" justify="center" align="center">
                   <v-btn variant="outlined" text="Chz Chat" @click="goToProject('https://chat.chhongzh.xyz:5777')" />
                 </v-row>
               </Transition>
@@ -77,9 +68,6 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import "@/styles/font.css"
-// import { VCodeBlock } from '@wdns/vue-code-block';
-// import chhongzhCode from '@/assets/chhongzh.go?raw'
 import { Vue3Marquee } from 'vue3-marquee';
 import backgroundText from '@/assets/Background Text'
 import { getRandomElements } from '@/common/utils';
