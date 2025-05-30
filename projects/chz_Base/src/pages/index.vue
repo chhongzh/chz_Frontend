@@ -39,13 +39,6 @@
                   <v-btn variant="outlined" text="Chz Chat" @click="goToProject('https://chat.chhongzh.xyz:5777')" />
                 </v-row>
               </Transition>
-
-              <Transition name="fade">
-                <v-row v-show="showOthersElement[1]" justify="center" align="center">
-                  <v-btn variant="tonal" icon="mdi-chevron-down" @click="viewIntroduce" />
-                </v-row>
-              </Transition>
-
             </v-col>
           </v-row>
         </v-card-text>
