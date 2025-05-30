@@ -1,12 +1,13 @@
 <template>
-  <Transition name="fade">
-    <div class="scrollBackground" v-show="showOtherElementSecond">
-      <Vue3Marquee v-for="i in backgroundTextLineCount" :key="i" class="marqueeText"
-        :direction="i % 2 == 0 ? 'reverse' : 'normal'" :delay="i * 0.1 + 0.1">
-        <p v-for="j in backgroundTexts[i - 1]" v-text="j" class="ml-12" />
-      </Vue3Marquee>
-    </div>
-  </Transition>
+  <div class="scrollBackground">
+    <Transition name="fade" v-for="i in backgroundTextLineCount">
+      <div v-if="showOthersElement[i + 1]">
+        <Vue3Marquee class="marqueeText" :direction="i % 2 == 0 ? 'reverse' : 'normal'" :duration="5 + 5 * i">
+          <p v-for="j in backgroundTexts[i - 1]" v-text="j" class="ml-12" />
+        </Vue3Marquee>
+      </div>
+    </Transition>
+  </div>
 
   <v-sheet class="transparent">
     <v-sheet style="height: 100vh" class="transparent" :elevation="0">
@@ -14,7 +15,7 @@
         <v-card-text style="height: 100%;">
           <!-- 头像优先 -->
           <v-row justify="center" align="center" style="height: 70%;" class="transparent">
-            <v-sheet class="avatar mb-6 transparent" @animationend="whenAnimationEnd">
+            <v-sheet class="avatar mb-6 transparent" @animationend="startShowOthers">
               <v-img ondragstart="return false" rounded="circle" src="@/assets/Avatar Dark but Vuetify.jpg"></v-img>
             </v-sheet>
           </v-row>
@@ -24,7 +25,7 @@
             <v-col cols="12">
               <!-- 解释 -->
               <Transition name="fade">
-                <v-row v-show="showOtherElementFirst" justify="center" align="center" class="mb-4">
+                <v-row v-show="showOthersElement[0]" justify="center" align="center" class="mb-4">
                   <span class="text-h3" style="font-family: 'Maler';">A boy who codes.</span>
                 </v-row>
               </Transition>
@@ -34,13 +35,13 @@
             <v-col cols="12">
               <!-- 项目列表 -->
               <Transition name="fade" class="mb-4">
-                <v-row v-show="showOtherElementSecond" justify="center" align="center">
+                <v-row v-show="showOthersElement[1]" justify="center" align="center">
                   <v-btn variant="outlined" text="Chz Chat" @click="goToProject('https://chat.chhongzh.xyz:5777')" />
                 </v-row>
               </Transition>
 
               <Transition name="fade">
-                <v-row v-show="showOtherElementSecond" justify="center" align="center">
+                <v-row v-show="showOthersElement[1]" justify="center" align="center">
                   <v-btn variant="tonal" icon="mdi-chevron-down" @click="viewIntroduce" />
                 </v-row>
               </Transition>
@@ -56,7 +57,7 @@
         <v-card class="h-100" :elevation="12">
           <v-card-text>
             <VCodeBlock :code="chhongzhCode" highlightjs style="font-size: 1.5rem;" lang="golang" :copyTab="false"
-              :copyButton="false" :copyIcons="false" tabs @run="console.log('123')">
+              :copyButton="false" :copyIcons="false" tabs>
               <template #label>
                 <p ref="introduceTitleRef" class="text-h4">简介</p>
               </template>
@@ -95,6 +96,7 @@ import {
 }
   // @ts-ignore
   from '~build/info'
+import logger from '@/common/logger';
 
 definePage({
   meta: {
@@ -107,17 +109,9 @@ const backgroundTextLineCount = 5
 
 const introduceTitleRef = ref(null)
 
-const showOtherElementFirst = ref(false)
-const showOtherElementSecond = ref(false)
+const showOthersElement = ref(Array(2 + 5).fill(false))
 
 
-const whenAnimationEnd = () => {
-  showOtherElementFirst.value = true
-
-  setTimeout(() => {
-    showOtherElementSecond.value = true
-  }, 300)
-}
 
 const viewIntroduce = () => {
   introduceTitleRef.value?.scrollIntoView({
@@ -132,8 +126,24 @@ const initBackgroundText = () => {
 
   for (let i = 0; i < backgroundTextLineCount; i++) {
     // 随机取出一些字符
-    backgroundTexts.value[i] = getRandomElements(getRandomElements(backgroundText, 15).concat('CHZ!').concat('WMZ!'), 17)
+    backgroundTexts.value[i] = getRandomElements(backgroundText, 13)
   }
+}
+
+const startShowOthers = () => {
+  for (let i = 0; i < 2; i++) {
+    setTimeout(() => {
+      showOthersElement.value[i] = true
+    }, i * 300)
+  }
+  setTimeout(() => {
+    for (let i = 2; i < showOthersElement.value.length; i++) {
+      setTimeout(() => {
+        showOthersElement.value[i] = true
+      }, i * 100)
+    }
+  }, 222)
+  logger.info('Aniamtion Timer set done.')
 }
 
 const goToProject = (url: string) => {
