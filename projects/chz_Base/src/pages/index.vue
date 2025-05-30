@@ -53,29 +53,30 @@
     </v-sheet>
 
     <v-container>
-      <v-sheet style="min-height: 100vh" class="transparent">
+      <v-sheet class="transparent">
         <v-card class="h-100" :elevation="12">
           <v-card-text>
+            <span class="text-h5">由 chhongzh 设计并开发.</span>
+            <Text>
+              Commit: <v-code>{{ abbreviatedSha }}</v-code><br />
+              Message: <v-code>{{ commitMessage }}</v-code><br />
+              Date: <v-code>{{ committerDate }}</v-code>
+            </Text>
+          </v-card-text>
+          <!-- <v-card-text>
             <VCodeBlock :code="chhongzhCode" highlightjs style="font-size: 1.5rem;" lang="golang" :copyTab="false"
               :copyButton="false" :copyIcons="false" tabs>
               <template #label>
                 <p ref="introduceTitleRef" class="text-h4">简介</p>
               </template>
-            </VCodeBlock>
-          </v-card-text>
+</VCodeBlock>
+</v-card-text> -->
         </v-card>
       </v-sheet>
 
       <!-- Footer -->
       <v-card class="mt-12">
-        <v-card-text>
-          <span class="text-h5">由 chhongzh 设计并开发.</span>
-          <Text>
-            Commit: <v-code>{{ abbreviatedSha }}</v-code><br />
-            Message: <v-code>{{ commitMessage }}</v-code><br />
-            Date: <v-code>{{ committerDate }}</v-code>
-          </Text>
-        </v-card-text>
+
       </v-card>
     </v-container>
   </v-sheet>
@@ -84,8 +85,8 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import "@/styles/font.css"
-import { VCodeBlock } from '@wdns/vue-code-block';
-import chhongzhCode from '@/assets/chhongzh.go?raw'
+// import { VCodeBlock } from '@wdns/vue-code-block';
+// import chhongzhCode from '@/assets/chhongzh.go?raw'
 import { Vue3Marquee } from 'vue3-marquee';
 import backgroundText from '@/assets/Background Text'
 import { getRandomElements } from '@/common/utils';
